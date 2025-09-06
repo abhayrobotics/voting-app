@@ -19,6 +19,24 @@ const checkAdminRole = async (userID) => {
    }
 }
 
+// get the details of all candidates
+
+router.get('/', async (req,res)=>{
+  try{
+
+    const data =await  Candidate.find()
+    console.log(data)
+    
+    res.status(200).json(data)
+  }
+  catch(error){
+     console.log({ eror: error });
+    res.status(500).json({ error: "Internal Server Error" });
+
+  }
+
+})
+
 // post method to Add candidate data in DB( only admin)
 router.post("/",jwtAuthMiddleware, async (req, res) => {
   // Save the new person into the database
@@ -49,7 +67,7 @@ router.post("/",jwtAuthMiddleware, async (req, res) => {
 
 
 
-
+// update candidate info
 router.put("/:candidateID", jwtAuthMiddleware,async (req, res) => {
   try {
     console.log(req.user)

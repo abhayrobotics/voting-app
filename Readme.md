@@ -30,7 +30,7 @@ User Authentication:
     /login :POST - log in to an existing account ( aadhar + password) ✔️
 
 Voting
-    /candidate :GET - get the listof candidates
+    /candidate :GET - get the listof candidates✔️
     /vote/:candidate; POST - vote for a specific candidate.
 
 Vote Count:
