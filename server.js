@@ -15,12 +15,13 @@ const PORT = process.env.PORT || 3000;
 
 // Import the router files
 const userRoutes = require('./routes/userRoutes');
+const candidateRoutes = require('./routes/candidateRoutes')
 const { jwtAuthMiddleware } = require("./jwt");
 // const menuItemRoutes = require ('./routes/menuItemRoutes');
 
 // using routes 
 app.use("/user",userRoutes);
-// app.use('/candidate',localAuthMiddleware,menuItemRoutes);
+app.use('/candidate',candidateRoutes);
 
 
 app.listen(PORT, () => {

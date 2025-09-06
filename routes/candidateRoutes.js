@@ -8,35 +8,39 @@ const Candidate = require("../models/candidate");
 const User = require("../models/user")
 
 
-const checkAdminRole = async (userID) =>{
-    try{
-       if(!checkAdminRole(req.user.id)){
-            return res.status(403).json({message:"user does has not admin role"})
-        
+const checkAdminRole = async (userID) => {
+   try{
+        const user = await User.findById(userID);
+        if(user.role === 'admin'){
+            return true;
         }
-
-        const user  = await User.findById(userID)
-        return user.role ==="admin"
-    }catch(error){
-        return false
-    }
+   }catch(err){
+        return false;
+   }
 }
 
-// post method to save data in DB
-router.post("/",async (req, res) => {
+// post method to Add candidate data in DB( only admin)
+router.post("/",jwtAuthMiddleware, async (req, res) => {
   // Save the new person into the database
   try {
     const data = req.body; // Assuming the request body contains the person data
-    console.log(data);
+    console.log("check",data);
 
     // create a new user document using mongoose model
     const newCandidate = new Candidate(data);
+
+    // verify admin -user
+    const userId = req.user.id
+    console.log(userId)
+    if(  !(await checkAdminRole(userId))){
+        return res.status(400).json({"message":"you dont have admin access"})
+    }
 
     const response = await newCandidate.save();
     console.log("person saved");
 
 
-    res.status(200).json({ response: response, token: token });
+    res.status(200).json({ response: response});
   } catch (error) {
     console.log({ eror: error });
     res.status(500).json({ error: "Internal Server Error" });
@@ -46,39 +50,43 @@ router.post("/",async (req, res) => {
 
 
 
-router.put("/:candidateID", async (req, res) => {
+router.put("/:candidateID", jwtAuthMiddleware,async (req, res) => {
   try {
-     if(!checkAdminRole(req.user.id)){
+    console.log(req.user)
+     if(!(await checkAdminRole(req.user.id))){
             return res.status(403).json({message:"user does has not admin role"})
         }//1. we need ID
     const candidateID = req.params.candidateID;
     // 2. we need updated data
     const updatedData = req.body;
+    console.log(candidateID)
 
-    const response = await Person.findByIdAndUpdate(candidateID,updatedData,{
+    const response = await Candidate.findByIdAndUpdate(candidateID,updatedData,{
       new:true, //return the updated document
       runValidators:true // run mongoose validation
     })
+    console.log(response)
     if(!response){
       console.log("candiadate NOt found" )
     }
     console.log("data updated");
     res.status(200).json(response)
   
-  } catch (e) {
+  } catch (error) {
     console.log({ eror: error });
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-router.delete("/:candidateID", async (req, res) => {
+// Delete a candidate
+
+router.delete("/:candidateID",jwtAuthMiddleware, async (req, res) => {
   try {
-     if(!checkAdminRole(req.user.id)){
+     if(!(await checkAdminRole(req.user.id))){
             return res.status(403).json({message:"user does has not admin role"})
         }//1. we need ID
     const candidateID = req.params.candidateID;
-    // 2. we need updated data
-    const updatedData = req.body;
+    
 
     const response = await Candidate.findByIdAndDelete(candidateID,)
     if(!response){
@@ -87,8 +95,8 @@ router.delete("/:candidateID", async (req, res) => {
     console.log("data deleted");
     res.status(200).json(response)
   
-  } catch (e) {
-    console.log({ eror: error });
+  } catch (error) {
+    console.log({ error: error });
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

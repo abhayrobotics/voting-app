@@ -31,6 +31,7 @@ const jwtAuthMiddleware = (req,res,next) =>{
 // generate JWT Token
 const generateToken = (userData)=>{
     // generae a new JWT toekn using user data
+    // user data is a jsonformat payload
     return jwt.sign(userData,process.env.JWT_secret)
 }
 
