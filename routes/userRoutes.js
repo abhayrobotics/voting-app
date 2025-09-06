@@ -15,7 +15,8 @@ router.post("/signup",async (req, res) => {
 
     // create a new user document using mongoose model
     const newUser = new User(data);
-
+    
+    // before save can run a pre middleware code runs in  
     const response = await newUser.save();
     console.log("person saved");
 
@@ -37,7 +38,7 @@ router.post("/signup",async (req, res) => {
 });
 
 // Login Router
-router.post("/login", jwtAuthMiddleware,async (req, res) => {
+router.post("/login",async (req, res) => {
   try {
     // extract username and password from request body
     const { aadharCardNumber, password } = req.body;
@@ -85,7 +86,7 @@ router.get('/profile', jwtAuthMiddleware, async (req, res) => {
 router.put("/:profile/password",jwtAuthMiddleware, async (req, res) => {
   try {
     //extract the ID
-    const userID = req.user;
+    const userID = req.user.id;
     // Extract current and new password
     const {currentPassword,newPassword} = req.body
    
@@ -104,7 +105,7 @@ router.put("/:profile/password",jwtAuthMiddleware, async (req, res) => {
     console.log("Password updated");
 
     res.status(200).json({message:"password updated"});
-  } catch (e) {
+  } catch (error) {
     console.log({ eror: error });
     res.status(500).json({ error: "Internal Server Error" });
   }
