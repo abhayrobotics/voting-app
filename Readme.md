@@ -31,10 +31,10 @@ User Authentication:
 
 Voting
     /candidate :GET - get the listof candidates✔️
-    /vote/:candidate; POST - vote for a specific candidate.
+    /vote/:candidate; POST - vote for a specific candidate.✔️
 
 Vote Count:
-    /vote/counts :GET - get the list of a candidate sorted by the vote count
+    /vote/counts :GET - get the list of a candidate sorted by the vote count ✔️
 
 User Profile:
     /profile: GET - Get the user'sprofile information ✔️
