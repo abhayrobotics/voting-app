@@ -2,16 +2,32 @@
 
 var express = require("express");
 
+
 let app = express();
-// require("dotenv").config()
+require("dotenv").config()
 
 const bodyParser = require("body-parser");
-
+const db = require("./db")
+app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 
 
+
+// Import the router files
+const userRoutes = require('./routes/userRoutes');
+const { jwtAuthMiddleware } = require("./jwt");
+// const menuItemRoutes = require ('./routes/menuItemRoutes');
+
+// using routes 
+app.use("/user",userRoutes);
+// app.use('/candidate',localAuthMiddleware,menuItemRoutes);
 
 
 app.listen(PORT, () => {
   console.log("Express JS server is running at 3000");
 });
+
+app.get("/",(req,res)=>{
+  res.send("Welcome to Voting app")
+  }
+)

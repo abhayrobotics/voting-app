@@ -1,6 +1,6 @@
 
 const mongoose  = require("mongoose");
-// const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt")
 
 const UserSchema = new mongoose.Schema({
     name:{
@@ -10,10 +10,6 @@ const UserSchema = new mongoose.Schema({
     age:{
         type:Number,
         required:true
-    },
-    email:{
-        type:String,
-
     },
     mobile:{
         type:String
@@ -27,6 +23,10 @@ const UserSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
+    password:{
+        type:String,
+        required:true
+    },
     role:{
         type:String,
         enum:["voter","admin"],
@@ -38,6 +38,41 @@ const UserSchema = new mongoose.Schema({
     }
 
 })
+// Hashing
+UserSchema.pre('save',async function (next){
+    const user  = this;
+
+    // hash the password only if it is modified or is new
+    if(!user.isModified('password')) return next();
+    
+    try{
+        // hash password generate
+        const salt = await bcrypt.genSalt(10);
+
+        // hashpassword
+        const hashpassword = await bcrypt.hash(user.password,salt)
+        user.password = hashpassword
+        
+        next()
+    }
+    catch(err){
+        return next(err);
+    }
+})
+
+// creating a compare function
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+    try{
+        // console.log("check",this.password)
+        
+        const isMatch  = await bcrypt.compare(candidatePassword, this.password);
+        // console.log(candidatePassword,isMatch)
+        return isMatch;
+    }   
+    catch(err){
+        throw err;
+    } 
+}
 
 
 // create a User model
