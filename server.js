@@ -11,6 +11,14 @@ const db = require("./db")
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 
+// Using CORS access
+const cors = require("cors")
+const corsOptions = {
+  origin:"http://localhost:5173/",
+  method:"GET, POST, PUT, DELETE, PATCH, HEAD ",
+  Credential:true
+}
+app.use(cors(corsOptions))
 
 
 // Import the router files
