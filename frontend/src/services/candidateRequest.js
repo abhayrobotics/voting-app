@@ -1,25 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from 'react'
-const candidateRequest = () => {
-  const [data, setData] = useState([]);
-
-  const [credentials, seCredentials] = useState([]);
-
-  
-  useEffect(() => {
-    getCounts()
-    postData()
-  }, [])
 
 
-  // GET request
-  const getCounts = async () => {
-    const result = await fetch("http://localhost:3000/vote/counts");
+
+  // GET request :All votes data
+  export const getCounts = async () => {
+    const result = await fetch(`http://localhost:3000/vote/counts`);
     const json = await result.json();
 
-    // console.log(json)
+    console.log(json)
 
-    setData(json);
+    // setData(json);
+    return json
   };
 
   // POST Request + DATA(payload)
@@ -65,7 +57,10 @@ const candidateRequest = () => {
     return response.data;
   };
 
-  return <div><diV onClick= {()=>addCandidate(payload)}> Add Candidate</diV></div>;
-};
+  // return (<div onClick= {()=>addCandidate(payload)}> Add Candidate</div>)
 
-export default candidateRequest;
+// };
+
+// export default candidateRequest;
+
+// export {getCounts}
