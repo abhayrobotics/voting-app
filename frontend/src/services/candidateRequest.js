@@ -5,7 +5,9 @@ import { useEffect, useState } from 'react'
 
   // GET request :All votes data
   export const getCounts = async () => {
-    const result = await fetch(`http://localhost:3000/vote/counts`);
+    // const url= 
+    // console.log(url)
+    const result = await fetch(`${import.meta.env.VITE_BASE_URL}/vote/counts`);
     const json = await result.json();
 
     console.log(json)
@@ -13,6 +15,13 @@ import { useEffect, useState } from 'react'
     // setData(json);
     return json
   };
+
+  // get all candidate data:GET
+  export const getCandidate = async ()=>{
+    const result = await fetch( `${import.meta.env.VITE_BASE_URL}/candidate`)
+    const json = await result.json()
+    return  json
+  }
 
   // POST Request + DATA(payload)
   let credentials11 = {
