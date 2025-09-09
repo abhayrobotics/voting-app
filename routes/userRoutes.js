@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 
+
+
 const { jwtAuthMiddleware, generateToken } = require("../jwt");
 const User = require("../models/user");
 
@@ -29,6 +31,15 @@ router.post("/signup",async (req, res) => {
 
     console.log(JSON.stringify(payload));
     console.log("token is :", token);
+
+    // saving the JWT token in cookie
+    res.cookie("token",token,{
+      httpOnly:true,
+      secure:true,
+      sameSite:"Strict",
+      maxAge: 7 *24 *60* 60 *1000,
+
+    })    
 
     res.status(200).json({ response: response, token: token });
   } catch (error) {

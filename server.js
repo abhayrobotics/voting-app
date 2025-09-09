@@ -2,7 +2,6 @@
 
 var express = require("express");
 
-
 let app = express();
 require("dotenv").config()
 
@@ -20,6 +19,9 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
+// cookie parser
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 // Import the router files
 const userRoutes = require('./routes/userRoutes');
