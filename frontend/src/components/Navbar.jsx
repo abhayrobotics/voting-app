@@ -8,8 +8,8 @@ const Navbar = () => {
         <Link to="/" ><div className='cursor-pointer'>Voting app</div></Link>
         <div className='flex justify-between '>
           <Link to = "/candidate"><div className='px-2 cursor-pointer'>  Add candidate</div></Link>
-          <Link to = "/vote"><div className='px-2 cursor-pointer'> Vote</div></Link>
           <Link to = "/login"><div className='px-2 cursor-pointer'> Login</div></Link>
+          <Link to = "/dashboard"><div className='px-2 cursor-pointer'> welcome, Admin</div></Link>
         </div>
       </nav>
       </div>

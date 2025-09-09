@@ -12,8 +12,8 @@ const LeaderBoard = ({ data }) => {
                 <div className=" w-4 text-center mx-1"> Votes</div>
             </div>
                 <hr className="" />
-                {data.map((item => {
-                    return (<>
+                {data.map((item, index) => {
+                    return (<div key={index}>
                         <div className="flex  m-1 ">
 
                             <div className=" w-52 mx-1">  {item.name}</div>
@@ -21,8 +21,8 @@ const LeaderBoard = ({ data }) => {
                             <div className=" w-8 text-center mx-1"> {item.votes}</div>
                         </div>
                         <hr className="" />
-                    </>)
-                }))}</div>
+                    </div>)
+                })}</div>
         </div>
     </>
     )

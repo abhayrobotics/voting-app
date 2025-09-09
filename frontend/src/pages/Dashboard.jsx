@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Vote = () => {
+const Dashboard = () => {
   return (
     <div> <Navbar /></div>
   )
 }
 
-export default Vote
+export default Dashboard

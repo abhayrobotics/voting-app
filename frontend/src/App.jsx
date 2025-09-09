@@ -1,7 +1,7 @@
 import { Routes,Route } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home'
-import Vote from './pages/Vote'
+import Dashboard from './pages/Dashboard'
 import Candidate from './pages/Candidate'
 import Login from './pages/Login'
 
@@ -12,9 +12,9 @@ function App() {
       
      <Routes>
       <Route path='/' element={<Home/>}></Route>
-      <Route path='/vote' element={<Vote/>}></Route>
-      <Route path='/candidate' element={<Candidate/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
+      <Route path='/candidate' element={<Candidate/>}></Route>
+      <Route path='/dashboard' element={<Dashboard/>}></Route>
      </Routes>
       
     </>

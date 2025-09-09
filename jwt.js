@@ -4,7 +4,7 @@ const jwtAuthMiddleware = (req,res,next) =>{
     console.log("jwt middleware")
     // Check whether request header has authorization or not
     const authorizarion = req.headers.authorization
-    console.log(authorizarion)
+    // console.log(authorizarion)
     if(!authorizarion) {
         return res.status(401).json({error:"Token not Found"})
     }
