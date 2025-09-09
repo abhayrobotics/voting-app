@@ -39,23 +39,24 @@ export   const loginRequest = async (signup) => {
     return result
   };
 
-  // Login
+  // !Login
   // POST Request + DATA(payload)
   let credentials11 = {
     aadharCardNumber: 123456785012,
     password: "12345",
   };
-  const postData = async () => {
-    const data1 = await fetch("http://localhost:3000/user/login", {
+  export const postData = async (data) => {
+    const data1 = await fetch(`${import.meta.env.VITE_BASE_URL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(credentials11),
+      body: JSON.stringify(data),
     });
 
     const reslt1 = await data1.json();
     console.log(reslt1);
+    return reslt1
   };
 
   // POST  request +DATA + JWT token
