@@ -23,6 +23,23 @@ import { useEffect, useState } from 'react'
     return  json
   }
 
+  // signup
+
+export   const loginRequest = async (signup) => {
+    const data1 = await fetch( `${import.meta.env.VITE_BASE_URL}/user/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signup),
+    });
+
+    const result = await data1.json();
+    console.log(result);
+    return result
+  };
+
+  // Login
   // POST Request + DATA(payload)
   let credentials11 = {
     aadharCardNumber: 123456785012,
