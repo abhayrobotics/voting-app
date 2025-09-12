@@ -49,45 +49,55 @@ export   const loginRequest = async (signup) => {
   export const postData = async (data) => {
     const data1 = await fetch(`${import.meta.env.VITE_BASE_URL}/user/login`, {
       method: "POST",
+      credentials:"include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
 
-    const reslt1 = await data1.json();
-    console.log(reslt1);
-    return reslt1
+    const result = await data1.json();
+    console.log({"Token received at ": result.token});
+    //  localStorage.setItem("token",result.token)
+    return result.token
   };
 
   
   // POST  request +DATA + JWT token
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmM3NGQ2MjIzYTZjMjQyMjhlYzYxZiIsImlhdCI6MTc1NzI3Nzg0OX0.bKcmJo7NIvqLalJH71KplVuCA-1TbU0pVL11CqQiFQI";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YzNhNThiZTA3ODZjNWU1MmZiNmQ4NSIsImlhdCI6MTc1NzY2MDM3Nn0.Gv_H72Mpcd5zdCnO3_Pe3Lqq0f46_R6Z0A58W5fCJ9U";
   //  const token = req.cookies.token;
-    console.log("check",token)
-    const payload = {
-    name: "Akhilesh Yadav",
-    party: "RJD",
-    age: 66,
-  };
+    // console.log("check",token)
+  //   const payload = {
+  //   name: "Akhilesh Yadav",
+  //   party: "RJD",
+  //   age: 66,
+  // };
 
   // central function to be used multiple time
-  const axiosClient = axios.create({
-    baseURL: "http://localhost:3000",
-    headers: {
-      "Content-Type": "application/json",
-      // Authorization: `Bearer ${token}`,
-      credentials: "include" 
-    },
-  });
+  
 
   //TODO: add a candidate
 
-  const addCandidate = async (payload) => {
-    const response = await axiosClient.post(`/candidate`, payload);
-    console.log(response.data);
-    return response.data;
+  export const addCandidate = async (payload) => {
+    const axiosClient = axios.create({
+    baseURL: "http://localhost:3000",
+    withCredentials: true, 
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+    try{
+
+      const response = await axiosClient.post(`/candidate`, payload);
+      console.log(response.data);
+      return response.data;
+    }
+    catch(error){
+      console.log(error)
+      return {payload}
+    }
   };
 
   

@@ -37,7 +37,7 @@ router.get('/', async (req,res)=>{
 
 })
 
-// post method to Add candidate data in DB( only admin)
+// TODO: post method to Add candidate data in DB( only admin)
 router.post("/",jwtAuthMiddleware, async (req, res) => {
   // Save the new person into the database
   try {

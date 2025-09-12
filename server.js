@@ -10,18 +10,19 @@ const db = require("./db")
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 
+// cookie parser
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 // Using CORS access
 const cors = require("cors")
 const corsOptions = {
   origin:"http://localhost:5173",
-  method:"GET, POST, PUT, DELETE, PATCH, HEAD ",
-  Credential:true
+  methods:"GET,POST,PUT,DELETE,PATCH,HEAD",
+  credentials:true,
+  
 }
 app.use(cors(corsOptions))
-
-// cookie parser
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
 
 // Import the router files
 const userRoutes = require('./routes/userRoutes');

@@ -3,16 +3,17 @@ const jwt = require("jsonwebtoken")
 const jwtAuthMiddleware = (req,res,next) =>{
     console.log("jwt middleware")
     // Check whether request header has authorization or not
-    const authorizarion = req.headers.authorization
+    // const authorizarion = req.headers.authorization
     // console.log(authorizarion)
-    if(!authorizarion) {
-        return res.status(401).json({error:"Token not Found"})
-    }
+    // if(!authorizarion) {
+    //     return res.status(401).json({error:"Token not Found"})
+    // }
 
     // Extract the JWT token
-    const token  = authorizarion.split(' ')[1];
-     
-    if(!token) return res.status(401).json({error:"Unauthorized"});
+    // const token  = authorizarion.split(' ')[1] || req.cookies.token;
+    const token  = req.cookies.token;
+     console.log(req)
+    if(!token) return res.status(401).json({error:"Unauthorized",token:token});
 
     try{
         // vrify the JWT Token

@@ -1,16 +1,19 @@
 import Navbar from "../components/Navbar"
 import LeaderBoard from "../components/LeaderBoard"
 import { useEffect, useRef, useState } from "react"
-import { getCounts } from "../services/candidateRequest"
+import { addCandidate, getCounts } from "../services/candidateRequest"
 import Dashboard from "../components/Dashboard"
 
 const Admin = () => {
   const [count, setCount] = useState([])
   const [showInput,setInputForm] =useState(false)
-  const [candidateData, setCandidateData] = useState("No Candidate Selected")
+  const [candidateData, setCandidateData] = useState({}
+
+  )
   const name = useRef()
   const age = useRef()
   const party = useRef()
+  
   useEffect(() => {
     const getRequest = async () => {
 
@@ -20,7 +23,15 @@ const Admin = () => {
     }
     getRequest()
   }, [])
-
+  const handleSave =async ()=>{
+    const payload = {
+      "name":name.current.value,
+      "age":age.current.value,
+      "party":party.current.value,
+    }
+     const result = await addCandidate(payload)
+     console.log("candidate added",result)
+  }
 
   const handleUpdate = () => {
 
@@ -59,7 +70,7 @@ const Admin = () => {
                 <span className='text-xl text-amber-300'>Party</span>
                 <input ref={party} type='text' placeholder='Enter your party name' className='w-72 bg-[#242424] border h-9 border-amber-300 rounded-lg  hover:bg-[#3a3a3a] px-2' ></input>
               </div>
-              <div className=" text-center self-center my-6 p-1 w-4/4 cursor-pointer rounded-lg bg-amber-500 hover:bg-amber-300 text-black font-semibold " > Save </div>
+              <div onClick={handleSave} className=" text-center self-center my-6 p-1 w-4/4 cursor-pointer rounded-lg bg-amber-500 hover:bg-amber-300 text-black font-semibold " > Save </div>
 
             </div>
 

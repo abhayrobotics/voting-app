@@ -33,7 +33,7 @@ router.post("/signup", async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -68,15 +68,17 @@ router.post("/login", async (req, res) => {
     // saving the JWT token in cookie
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "Strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      secure: false,
+      // sameSite: "none",
+       path: "/",     
+      // maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-    console.log(res.cookie())
+   
+    console.log("token set in header")
     // return token as response
     res.json({ token });
   } catch (e) {
-    console.log({ eror: error });
+    console.log({ error: e });
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
