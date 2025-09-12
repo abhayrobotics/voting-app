@@ -32,7 +32,7 @@ const Home = () => {
         <div className='flex px-5 flex-wrap w-2/3 bg-[#2e2e2e] m-4 p-2 rounded-xl'>
           {candidate.map((item,index)=><CandidateCard data ={item} key={index}/>)}
         </div>
-        <LeaderBoard data={count}/>
+        <LeaderBoard data={count} allData={true} title={"LeaderBoard"}/>
       </div>
       
     </div>

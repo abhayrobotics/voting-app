@@ -2,8 +2,8 @@ const mongoose  = require("mongoose");
 require("dotenv").config()
 
 // define mongoDB connection URL
-const mongoUrl = "mongodb://0.0.0.0:27017/voting"
-// const mongoUrl = process.env.DB_URL
+// const mongoUrl = "mongodb://0.0.0.0:27017/voting"
+const mongoUrl = process.env.DB_URL
 
 // set up mongo Db connection
 

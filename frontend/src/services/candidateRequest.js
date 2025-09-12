@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react'
   export const getCandidate = async ()=>{
     const result = await fetch( `${import.meta.env.VITE_BASE_URL}/candidate`)
     const json = await result.json()
+    console.log(json)
     return  json
   }
 
@@ -89,10 +90,4 @@ export   const loginRequest = async (signup) => {
     return response.data;
   };
 
-  // return (<div onClick= {()=>addCandidate(payload)}> Add Candidate</div>)
-
-// };
-
-// export default candidateRequest;
-
-// export {getCounts}
+  
