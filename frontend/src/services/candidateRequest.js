@@ -1,4 +1,5 @@
 import axios from "axios";
+import { includes } from "lodash";
 import { useEffect, useState } from 'react'
 
 
@@ -60,9 +61,9 @@ export   const loginRequest = async (signup) => {
 
   
   // POST  request +DATA + JWT token
-  // const token =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmM3NGQ2MjIzYTZjMjQyMjhlYzYxZiIsImlhdCI6MTc1NzI3Nzg0OX0.bKcmJo7NIvqLalJH71KplVuCA-1TbU0pVL11CqQiFQI";
-   const token = req.cookies.token;
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmM3NGQ2MjIzYTZjMjQyMjhlYzYxZiIsImlhdCI6MTc1NzI3Nzg0OX0.bKcmJo7NIvqLalJH71KplVuCA-1TbU0pVL11CqQiFQI";
+  //  const token = req.cookies.token;
     console.log("check",token)
     const payload = {
     name: "Akhilesh Yadav",
@@ -75,7 +76,8 @@ export   const loginRequest = async (signup) => {
     baseURL: "http://localhost:3000",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
+      credentials: "include" 
     },
   });
 

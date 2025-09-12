@@ -72,7 +72,7 @@ router.post("/login", async (req, res) => {
       sameSite: "Strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-
+    console.log(res.cookie())
     // return token as response
     res.json({ token });
   } catch (e) {
