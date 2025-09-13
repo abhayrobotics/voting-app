@@ -77,17 +77,17 @@ export   const loginRequest = async (signup) => {
   // central function to be used multiple time
   
 
+  const axiosClient = axios.create({
+  baseURL: "http://localhost:3000",
+  withCredentials: true, 
+  headers: {
+    "Content-Type": "application/json",
+    // Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+});
   //TODO: add a candidate
 
   export const addCandidate = async (payload) => {
-    const axiosClient = axios.create({
-    baseURL: "http://localhost:3000",
-    withCredentials: true, 
-    headers: {
-      "Content-Type": "application/json",
-      // Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
     try{
 
       const response = await axiosClient.post(`/candidate`, payload);
@@ -100,4 +100,25 @@ export   const loginRequest = async (signup) => {
     }
   };
 
+  // TODO : Update the candidate
+
+  export const  updateCandidate = async (payload)=>{
+    try{
+      
+    }catch(error){
+
+    }
+
+  }
+  
+  // TODO : Delete the candidate
+
+  export const  deleteCandidate = async (payload)=>{
+    try{
+
+    }catch(error){
+
+    }
+
+  }
   

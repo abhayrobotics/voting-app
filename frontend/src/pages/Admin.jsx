@@ -35,6 +35,16 @@ const Admin = () => {
 
   const handleUpdate = () => {
 
+    // fetch and paste the data from selection 
+
+
+    // get the change data
+    const payload = {
+      "name":name.current.value,
+      "age":age.current.value,
+      "party":party.current.value,
+    }
+
   }
   const deleteCan = () => {
 
@@ -76,7 +86,7 @@ const Admin = () => {
 
           </div> :<div className="h-56 flex items-center justify-center">No Candidate Selected</div>}
         </div>
-        <LeaderBoard data={count} onlyName={true} title={"All Candidates"} />
+        <LeaderBoard data={count}  allData={false}  title={"All Candidates"} />
       </div>
     </>)
 }
